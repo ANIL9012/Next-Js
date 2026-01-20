@@ -1,7 +1,7 @@
 import React from "react";
 
 export const metadata = {
-  title: "Servicer Web-Veda",
+  title: "Services Web-Veda",
 }
 
 function WebDev() {
