@@ -25,7 +25,6 @@ export async function POST(request) {
       );
     }
 
-    // Find user
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
@@ -34,7 +33,6 @@ export async function POST(request) {
       );
     }
 
-    // Check password
     const isValidPassword = comparePassword(password, user.password);
     if (!isValidPassword) {
       return NextResponse.json(
@@ -43,10 +41,8 @@ export async function POST(request) {
       );
     }
 
-    // Generate token
     const token = generateToken(user._id, user.email);
 
-    // Create response
     const response = NextResponse.json(
       {
         message: "Login successful",
@@ -59,7 +55,6 @@ export async function POST(request) {
       { status: 200 },
     );
 
-    // Set cookie
     setAuthCookie(response, token);
 
     return response;

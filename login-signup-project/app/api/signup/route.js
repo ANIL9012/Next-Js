@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import User from "@/models/User";
 import { hashPassword, generateToken, setAuthCookie } from "@/lib/auth";
 
-// MongoDB connection
 const connectDB = async () => {
   if (mongoose.connections[0].readyState) return;
   await mongoose.connect(
@@ -18,7 +17,6 @@ export async function POST(request) {
     const body = await request.json();
     const { name, email, password } = body;
 
-    // Validation
     if (!name || !email || !password) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -33,7 +31,6 @@ export async function POST(request) {
       );
     }
 
-    // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -42,7 +39,6 @@ export async function POST(request) {
       );
     }
 
-    // Create user
     const hashedPassword = hashPassword(password);
     const user = await User.create({
       name,
@@ -50,10 +46,8 @@ export async function POST(request) {
       password: hashedPassword,
     });
 
-    // Generate token
     const token = generateToken(user._id, user.email);
 
-    // Create response
     const response = NextResponse.json(
       {
         message: "User created successfully",
@@ -66,7 +60,6 @@ export async function POST(request) {
       { status: 201 },
     );
 
-    // Set cookie
     setAuthCookie(response, token);
 
     return response;

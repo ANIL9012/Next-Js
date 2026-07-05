@@ -14,7 +14,6 @@ export async function GET(request) {
   try {
     await connectDB();
 
-    // Get token from cookie
     const cookieHeader = request.headers.get("cookie");
     const token = cookieHeader
       ?.split("; ")
