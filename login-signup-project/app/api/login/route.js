@@ -17,7 +17,6 @@ export async function POST(request) {
     const body = await request.json();
     const { email, password } = body;
 
-    // Validation
     if (!email || !password) {
       return NextResponse.json(
         { error: "Email and password are required" },

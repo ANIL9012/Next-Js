@@ -96,7 +96,6 @@ export default function SignupForm() {
     setLoading(true);
     setError("");
 
-    // Validate all fields
     const errors = {
       name: validateField("name", formData.name),
       email: validateField("email", formData.email),
@@ -147,7 +146,6 @@ export default function SignupForm() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      {/* Header Section */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-4">
           <svg
@@ -170,9 +168,7 @@ export default function SignupForm() {
         <p className="text-gray-600">Join our community today</p>
       </div>
 
-      {/* Main Card */}
       <div className="bg-white rounded-2xl shadow-2xl shadow-blue-100/50 p-8 border border-gray-100 transition-all duration-300 hover:shadow-blue-200/50">
-        {/* Error Message */}
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3 animate-shake">
             <svg
@@ -193,7 +189,6 @@ export default function SignupForm() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Name Field */}
           <div>
             <label
               htmlFor="name"
@@ -259,7 +254,6 @@ export default function SignupForm() {
             )}
           </div>
 
-          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -325,7 +319,6 @@ export default function SignupForm() {
             )}
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -445,7 +438,6 @@ export default function SignupForm() {
             )}
           </div>
 
-          {/* Confirm Password Field */}
           <div>
             <label
               htmlFor="confirmPassword"
@@ -557,7 +549,6 @@ export default function SignupForm() {
               )}
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -592,7 +583,6 @@ export default function SignupForm() {
             )}
           </button>
 
-          {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-200"></div>
@@ -604,7 +594,6 @@ export default function SignupForm() {
             </div>
           </div>
 
-          {/* Social Login Buttons */}
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
@@ -643,7 +632,6 @@ export default function SignupForm() {
             </button>
           </div>
 
-          {/* Login Link */}
           <p className="text-center text-sm text-gray-600 mt-4">
             Already have an account?{" "}
             <Link
