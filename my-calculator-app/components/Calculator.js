@@ -8,7 +8,6 @@ export default function Calculator() {
   const [operator, setOperator] = useState(null);
   const [waitingForOperand, setWaitingForOperand] = useState(false);
 
-  // ----- Input Functions -----
   const inputDigit = (digit) => {
     if (waitingForOperand) {
       setDisplay(String(digit));
@@ -29,7 +28,6 @@ export default function Calculator() {
     }
   };
 
-  // ----- Clear Functions -----
   const clearAll = () => {
     setDisplay('0');
     setPreviousValue('');
@@ -37,18 +35,14 @@ export default function Calculator() {
     setWaitingForOperand(false);
   };
 
-  // ⭐ BACKSPACE FUNCTION - NAYA ADD KIYA!
   const handleBackspace = () => {
     if (display.length > 1) {
-      // Agar display mein multiple digits hain toh last character hatao
       setDisplay(display.slice(0, -1));
     } else {
-      // Agar sirf 1 digit hai toh 0 set karo
       setDisplay('0');
     }
   };
 
-  // ----- Math Functions -----
   const toggleSign = () => {
     if (display !== '0') {
       setDisplay(display.startsWith('-') ? display.slice(1) : '-' + display);
@@ -98,7 +92,6 @@ export default function Calculator() {
     }
   };
 
-  // ----- Keyboard Support (with Backspace) -----
   useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key;
@@ -139,33 +132,27 @@ export default function Calculator() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [display, previousValue, operator, waitingForOperand]);
 
-  // ----- Buttons Array (Backspace added) -----
   const buttons = [
-    // Row 1: AC, ⌫ (Backspace), %, ÷
     { label: 'AC', action: clearAll, className: 'bg-red-500/80 hover:bg-red-600/90 text-white', span: 1 },
     { label: '⌫', action: handleBackspace, className: 'bg-amber-500/80 hover:bg-amber-600/90 text-white', span: 1 },  // ⭐ NAYA BACKSPACE BUTTON
     { label: '%', action: percentage, className: 'bg-slate-200/80 hover:bg-slate-300/90 text-slate-800', span: 1 },
     { label: '÷', action: () => handleOperator('÷'), className: 'bg-indigo-500/80 hover:bg-indigo-600/90 text-white', span: 1 },
     
-    // Row 2: 7, 8, 9, ×
     { label: '7', action: () => inputDigit(7), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '8', action: () => inputDigit(8), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '9', action: () => inputDigit(9), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '×', action: () => handleOperator('×'), className: 'bg-indigo-500/80 hover:bg-indigo-600/90 text-white', span: 1 },
     
-    // Row 3: 4, 5, 6, –
     { label: '4', action: () => inputDigit(4), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '5', action: () => inputDigit(5), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '6', action: () => inputDigit(6), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '–', action: () => handleOperator('-'), className: 'bg-indigo-500/80 hover:bg-indigo-600/90 text-white', span: 1 },
     
-    // Row 4: 1, 2, 3, +
     { label: '1', action: () => inputDigit(1), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '2', action: () => inputDigit(2), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '3', action: () => inputDigit(3), className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '+', action: () => handleOperator('+'), className: 'bg-indigo-500/80 hover:bg-indigo-600/90 text-white', span: 1 },
     
-    // Row 5: 0 (span 2), ., =
     { label: '0', action: () => inputDigit(0), className: 'bg-white/10 hover:bg-white/20 text-white', span: 2 },
     { label: '.', action: inputDecimal, className: 'bg-white/10 hover:bg-white/20 text-white', span: 1 },
     { label: '=', action: handleEqual, className: 'bg-indigo-600/90 hover:bg-indigo-700 text-white', span: 1 },
@@ -173,7 +160,6 @@ export default function Calculator() {
 
   return (
     <div className="w-full max-w-sm bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 p-6 ring-1 ring-indigo-500/30">
-      {/* Display */}
       <div className="bg-slate-900/80 rounded-2xl p-4 mb-5 border border-slate-700/50 shadow-inner">
         <div className="text-right">
           <div className="text-slate-400 text-sm font-mono h-6 truncate">
@@ -185,7 +171,6 @@ export default function Calculator() {
         </div>
       </div>
 
-      {/* Buttons Grid */}
       <div className="grid grid-cols-4 gap-3">
         {buttons.map((btn, index) => (
           <button
@@ -200,7 +185,6 @@ export default function Calculator() {
         ))}
       </div>
 
-      {/* Footer */}
       <div className="mt-5 text-center text-slate-400/70 text-xs flex items-center justify-center gap-2">
         <span className="inline-block w-2 h-2 rounded-full bg-indigo-400/60"></span>
         <span>Next.js · Tailwind CSS</span>
